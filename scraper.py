@@ -12,6 +12,7 @@ def get_value():
     r = requests.get(URL, timeout=10)
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.get_text()
+    print(text)
 
     match = re.search(r"(\d+)\s*Monat", text, re.IGNORECASE)
     if match:
