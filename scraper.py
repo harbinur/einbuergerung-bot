@@ -13,7 +13,7 @@ def get_value():
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.get_text()
 
-    match = re.search(r"Wartezeit.*?(\d+)\s*Monat", text)
+    match = re.search(r"(\d+)\s*Monat", text, re.IGNORECASE)
     if match:
         return match.group(1)
     return None
