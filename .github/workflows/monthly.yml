@@ -6,23 +6,24 @@ on:
   workflow_dispatch:
 
 jobs:
-  run:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repo'yu çek
-        uses: actions/checkout@v3
+    - name: Repo'yu çek
+      uses: actions/checkout@v3
 
-      - name: Python kur
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
+    - name: Python kur
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
 
-      - name: Gereksinimleri yükle
-        run: pip install -r requirements.txt
+    - name: Gereksinimleri yükle
+      run: pip install -r requirements.txt
 
-      - name: Scraper'ı çalıştır
-        env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: python scraper.py
+    - name: Scraper'ı çalıştır
+      working-directory: ${{ github.workspace }}   # ← KRİTİK SATIR
+      run: python scraper.py
+      env:
+        BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
