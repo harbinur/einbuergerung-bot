@@ -9,10 +9,19 @@ CHAT_ID = os.getenv("CHAT_ID")
 
 def get_value():
     r = requests.get(URL, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+    print("STATUS:", r.status_code)
+    print("LENGTH:", len(r.text))
+
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.get_text(separator="\n")
 
+    idx = text.find("Bearbeitung")
+    print("BEARBEITUNG BULUNDU MU:", idx != -1)
+    if idx != -1:
+        print("CEVRESI:", repr(text[idx-20:idx+150]))
+
     match = re.search(r"Aktuelle Bearbeitung:\s*Anträge aus\s*([A-Za-zÄÖÜäöü]+\s*\d{4})", text)
+    print("MATCH:", match)
     return match.group(1).strip() if match else None
 
 def send_telegram(msg):
