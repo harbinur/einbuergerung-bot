@@ -41,4 +41,4 @@ elif value != last_value:
     write_last_value(value)
 else:
     print(f"Değişiklik yok, hala: {value}")
-send_telegram("Test mesajı — grup CHAT_ID doğru mu?")
+
