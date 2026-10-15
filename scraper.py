@@ -12,6 +12,8 @@ def get_value():
     r = requests.get(URL, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
     soup = BeautifulSoup(r.text, "html.parser")
     text = soup.get_text(separator="\n")
+    
+    print(text)
 
     match = re.search(r"Aktuelle Bearbeitung:\s*Anträge aus\s*([A-Za-zÄÖÜäöü]+\s*\d{4})", text)
     return match.group(1).strip() if match else None
