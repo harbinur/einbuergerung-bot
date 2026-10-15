@@ -35,6 +35,8 @@ def send_telegram(msg):
 
 value = get_value()
 last_value = read_last_value()
+print(f"value=[{repr(value)}]")
+print(f"last_value=[{repr(last_value)}]")
 
 if value is None:
     send_telegram("Aylık güncelleme: 'Anträge aus' bilgisi bulunamadı")
